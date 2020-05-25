@@ -1,10 +1,43 @@
-# Weather-Journal App Project
+# Weather App Journal
 
-## Overview
-This project requires you to create an asynchronous web app that uses Web API and user data to dynamically update the UI. 
+> Weather App Journal
 
-## Instructions
-This will require modifying the `server.js` file and the `website/app.js` file. You can see `index.html` for element references, and once you are finished with the project steps, you can use `style.css` to style your application to customized perfection.
+![image](https://user-images.githubusercontent.com/55923773/82831133-29db5f80-9eea-11ea-968b-dbf222e11bbb.png)
 
-## Extras
-If you are interested in testing your code as you go, you can use `tests.js` as a template for writing and running some basic tests for your code.
+## Built With
+- HTML, CSS
+- Flexbox, Grid
+- VSCode
+
+## Deployment
+1) Clone or Download this repo.
+2) Change directory to the repo.
+3) Run `npm install` to install dependencies.
+4) Run `node server` or `npm run start`.
+5) Open `http://localhost:3000/` on your web browser.
+6) Enjoy :)gi
+
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome! Start by:
+* Forking the project
+* Cloning the project to your local machine
+* `cd` into the project directory
+* Run `git checkout -b your-branch-name`
+* Make your contributions
+* Push your branch up to your forked repository
+* Open a Pull Request with a detailed description to the development branch of the original project for a review
+
+## Author
+
+👤 **Kyle Law**
+
+- Github: [@Kyle-Law](https://github.com/Kyle-Law)
+- Twitter: [@Kyle-Law](https://twitter.com/ZhunKhing)
+- Linkedin: [Kyle law](https://www.linkedin.com/in/kyle-lawzhunkhing/)
+
+## Show your support
+
+Give a ⭐️ if you like this project!
+
+## Any feedbacks or suggestions are welcomed :)
