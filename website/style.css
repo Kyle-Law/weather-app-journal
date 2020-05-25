@@ -1,8 +1,112 @@
-// body{
-//     background: #fffff8;
-//     font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-// }
+*, *::after, *::before {
+    margin: 0;
+    box-sizing: border-box;
+}
 
+body{
+    background: #fffff8;
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.app {
+    background:aliceblue;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+    padding: 20px;
+    grid-gap: 20px;
+    height: 92vh;
+}
+
+.app-left{
+    font-size:1.5rem
+}
+
+.app-right{
+    background:yellow;
+    padding: 20px;
+    height: fit-content;
+}
+
+button {
+    padding: 10px;
+    color:turquoise;
+    border: 1px solid;
+    background-color:aliceblue;
+    border-radius:5px;
+    font-size: 1.5rem;
+    transition: 0.2s;
+    margin-top: 20px;
+}
+
+.feel {
+    width: 100%;
+}
+
+button:hover {
+    background-color:turquoise;
+    color:aliceblue;
+    cursor: pointer;
+}
+
+input, textarea {
+    font-size:1.5rem;
+    padding:5px
+}
+
+.col-2{
+    display:grid;
+    grid-template-columns: max-content 1fr;
+    margin: 10px;
+    grid-gap: 20px;
+    align-items: center;
+}
+
+.entryHolder .col-3 {
+    display:grid;
+    grid-template-columns: repeat(3,max-content);
+    grid-gap: 10px;
+    place-items:center;
+}
+
+.entry {
+    background: pink;
+    border: 1px solid black;
+    margin: 10px;
+    display: inline-block;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.num {
+    border: 3px solid yellow;
+    border-radius: 100%;
+    padding: 8px;
+}
+
+.entryHolder {
+    height: 70vh;
+    overflow: scroll;
+    // grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+}
+
+.holder h2 {
+    padding: 0 10px ;
+}
+
+footer {
+    background: black;
+    color: white;
+    text-align: right;
+    font-size: 1.2rem;
+    padding: 1rem;
+    height: 8vh
+}
+
+textarea {
+    width: 90%;
+    margin: 10px 0;
+    height: 200px;
+}
 // #app{
 //     display: grid;
 //     grid-auto-rows: minmax(150px, auto);
@@ -53,7 +157,7 @@
 //     font-size: 27px;
 // }
 
-// input{
+// input, textarea{
 //     display:block;
 //     height: 60px;
 //     width: 320px;

@@ -31,11 +31,11 @@ const updateUI = async () => {
       console.log(allData)
       allData.forEach((data,index)=>{
         const htmlData = `
-            <div class="row-2">
-                <div class="num">${index+1}</div>
+            <div class="col-2">
+                <div class="num">Day ${index+1}</div>
                 <div class="date">${data.date}</div>
             </div>
-            <div class="row-2">
+            <div class="col-3">
                 <img src="http://openweathermap.org/img/w/${data.icon}.png">
                 <div class="temp">${Math.floor(data.temp-273)}°c</div>
                 <div class="country">${data.country}</div>
@@ -62,16 +62,6 @@ const getWeather = async (baseURL, animal, key)=>{
   try {
 
     const data = await res.json();
-    // console.log(data);
-    // console.log(data.message)
-    // console.log(data.cod)
-    // console.log(data.name);
-    // console.log(`${Math.floor(data.main.temp -273)} celsius`);
-    // console.log(data.weather[0].main);
-    // console.log(data.weather[0].icon);
-    // var img = document.createElement("img");
-    // img.src = `http://openweathermap.org/img/w/${data.weather[0].icon}.png`;
-    // document.querySelector('#icon').appendChild(img);
     return data;
   }  catch(error) {
     console.log("error", error);
