@@ -1,22 +1,21 @@
 /* Global Variables */
-const baseURL = 'api.openweathermap.org/data/2.5/weather?q=';
-const apiKey = '    ';
+const baseURL = 'http://api.openweathermap.org/data/2.5/weather?q=';
+const apiKey = '&appid=a827ebeb3f600fff6e6558af4d980f98';
 
 // Create a new date instance dynamically with JS
 let d = new Date();
 let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
 
-document.getElementById('generate').addEventListener('click',performAction);
+document.getElementById('generate').addEventListener('click', performAction);
 
-function performAction(e) {
-    const newQuery = document.getElementById('zip').value;
-    // getWeather(baseURL,newQquery, apiKey)
-    const feelings = document.getElementById('feelings').value;
+function performAction(e){
+    const country =  document.getElementById('country').value;
+    const feelings = document.getElementById('feelings').value
 
-    getWeather('weatherData',)
+    getWeather(baseURL,country, apiKey)
     .then(function(data) {
-        console.log(data);
-        postData('/addWeather',{weather:data.weather.main,temp:data.main.temp})
+        // console.log(data);
+        postData('/addJournal',{date:newDate, temp: data.main.temp, icon:data.weather[0].icon, country:data.name, content: feelings})
     })
     .then(
         updateUI()
@@ -26,62 +25,78 @@ function performAction(e) {
 const updateUI = async () => {
     const request = await fetch('/all');
     try{
-        const allData = await request.json();
-        document.getElementById('date').innerHTML = newDate;
-        document.getElementById('temp').innerHTML = allData[0].temp;
-        document.getElementById('content').innerHTMl = allData[0].feelings
-    } catch(error) {
-        console.log("error",error);
+      const allData = await request.json();
+      entryHolder = document.getElementById('entryHolder');
+      entryHolder.innerHTML = '';
+      console.log(allData)
+      allData.forEach((data,index)=>{
+        const htmlData = `
+            <div class="row-2">
+                <div class="num">${index+1}</div>
+                <div class="date">${data.date}</div>
+            </div>
+            <div class="row-2">
+                <img src="http://openweathermap.org/img/w/${data.icon}.png">
+                <div class="temp">${Math.floor(data.temp-273)}°c</div>
+                <div class="country">${data.country}</div>
+            </div>
+            <div class="content">${data.content}</div>
+        `
+        const entry = document.createElement('div')
+        entry.classList.add('entry')
+        entry.innerHTML = htmlData
+        entryHolder.appendChild(entry)
+        // document.getElementById('date').innerHTML = data.date;
+        // document.getElementById('temp').innerHTML = data.temp;
+        // document.getElementById('content').innerHTML = data.mood;
+      })
+      
+    }catch(error){
+      console.log("error", error);
     }
+  }
+
+const getWeather = async (baseURL, animal, key)=>{
+
+  const res = await fetch(baseURL+animal+key)
+  try {
+
+    const data = await res.json();
+    // console.log(data);
+    // console.log(data.message)
+    // console.log(data.cod)
+    // console.log(data.name);
+    // console.log(`${Math.floor(data.main.temp -273)} celsius`);
+    // console.log(data.weather[0].main);
+    // console.log(data.weather[0].icon);
+    // var img = document.createElement("img");
+    // img.src = `http://openweathermap.org/img/w/${data.weather[0].icon}.png`;
+    // document.querySelector('#icon').appendChild(img);
+    return data;
+  }  catch(error) {
+    console.log("error", error);
+    // appropriately handle the error
+  }
 }
 
-const getWeather = async (baseURL, query, key) => {
-    const res = await fetch(baseURL+query+key)
+// Async POST
+const postData = async ( url = '', data = {})=>{
+
+    const response = await fetch(url, {
+    method: 'POST', 
+    credentials: 'same-origin', 
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data), // body data type must match "Content-Type" header        
+  });
+
     try {
-        const data = await res.json();
-        console.log(data)
-        return data;
-    } catch(error) {
-        console.log('error',error);
+      const newData = await response.json();
+      return newData
+    }catch(error) {
+    console.log("error", error);
     }
 }
 
-
-// const searchbox = document.getElementById('zip');
-// const submit = document.getElementById('generate')
-
-
-
-// submit.addEventListener('click',setQuery);
-
-// function setQuery() {
-//     console.log(searchbox.value)
-//     // getResults(searchbox.value)
-// }
-
-// function getResults (query) {
-//     fetch(`${api.base}weather?q=${query}&units=metric&APPID=${api.key}`)
-//     .then(weather => {
-//         return weather.json();
-//     }).then(displayResults);
-// }
-
-// function displayResults (weather) {
-//     let city = document.querySelector('.location .city');
-//     city.innerText = `${weather.name}, ${weather.sys.country}`;
-  
-//     let now = new Date();
-//     let date = document.querySelector('.location .date');
-//     date.innerText = newDate;
-  
-//     let temp = document.querySelector('.current .temp');
-//     temp.innerHTML = `${Math.round(weather.main.temp)}<span>°c</span>`;
-  
-//     let weather_el = document.querySelector('.current .weather');
-//     weather_el.innerText = weather.weather[0].main;
-  
-//     let hilow = document.querySelector('.hi-low');
-//     hilow.innerText = `${Math.round(weather.main.temp_min)}°c / ${Math.round(weather.main.temp_max)}°c`;
-//   }
-
-
+window.onload = updateUI;
