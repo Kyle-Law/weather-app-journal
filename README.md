@@ -8,6 +8,8 @@
 - HTML, CSS
 - Flexbox, Grid
 - VSCode
+- Node.js
+- Express.js
 
 ## Deployment
 1) Clone or Download this repo.
