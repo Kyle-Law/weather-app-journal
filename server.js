@@ -1,5 +1,5 @@
 // Setup empty JS object to act as endpoint for all routes
-projectData = [];
+projectData = {};
 
 // Require Express to run server and routes
 const express = require('express');
@@ -51,7 +51,7 @@ function addJournal(req,res) {
         country:req.body.country
     }
 
-    projectData.push(newEntry);
+    Object.assign(projectData, newEntry);
     res.send(projectData);
     console.log(projectData);
 };
