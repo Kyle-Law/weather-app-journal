@@ -1,6 +1,6 @@
 /* Global Variables */
-const baseURL = 'http://api.openweathermap.org/data/2.5/weather?q=';
-const apiKey = '&appid=a827ebeb3f600fff6e6558af4d980f98';
+const baseURL = 'http://api.openweathermap.org/data/2.5/weather?zip=';
+const apiKey = '&appid=a827ebeb3f600fff6e6558af4d980f98&units=imperial';
 
 // Create a new date instance dynamically with JS
 let d = new Date();
@@ -9,17 +9,17 @@ let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
 document.getElementById('generate').addEventListener('click', performAction);
 
 function performAction(e){
-    const country =  document.getElementById('country').value;
+    const zip =  document.getElementById('zip').value;
     const feelings = document.getElementById('feelings').value
 
-    getWeather(baseURL,country, apiKey)
+    getWeather(baseURL,zip, apiKey)
     .then(function(data) {
         // console.log(data);
         postData('/addJournal',{date:newDate, temp: data.main.temp, icon:data.weather[0].icon, country:data.name, content: feelings})
     })
-    .then(
+    .then(function(){
         updateUI()
-    )
+        })
 }
 
 const updateUI = async () => {
@@ -28,7 +28,6 @@ const updateUI = async () => {
       const allData = await request.json();
       entryHolder = document.getElementById('entryHolder');
       entryHolder.innerHTML = '';
-      console.log(allData)
       allData.forEach((data,index)=>{
         const htmlData = `
             <div class="col-2">
@@ -46,9 +45,6 @@ const updateUI = async () => {
         entry.classList.add('entry')
         entry.innerHTML = htmlData
         entryHolder.appendChild(entry)
-        // document.getElementById('date').innerHTML = data.date;
-        // document.getElementById('temp').innerHTML = data.temp;
-        // document.getElementById('content').innerHTML = data.mood;
       })
       
     }catch(error){
