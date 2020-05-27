@@ -1,7 +1,7 @@
 /* Global Variables */
 const baseURL = 'http://api.openweathermap.org/data/2.5/weather?zip=';
 const apiKey = '&appid=a827ebeb3f600fff6e6558af4d980f98&units=imperial';
-const dataArray = []
+// const dataArray = []
 // Create a new date instance dynamically with JS
 let d = new Date();
 let newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
@@ -19,16 +19,16 @@ function performAction(e){
     })
     .then(function(){
         updateUI()
-        })
+    })
 }
 
-function addView(){
+function addView(ar){
   entryHolder = document.getElementById('entryHolder');
   entryHolder.innerHTML = '';
-  dataArray.forEach((data,index)=>{
+  ar.forEach((data,index)=>{
     const htmlData = `
         <div class="col-2">
-            <div class="num">Day ${index+1}</div>
+            <div class="num">Day ${ar.length-index}</div>
             <div class="date">${data.date}</div>
         </div>
         <div class="col-3">
@@ -49,8 +49,7 @@ const updateUI = async () => {
   const request = await fetch('/all');
   try{
     const allData = await request.json();
-    dataArray.push(allData);
-    addView()
+    addView(allData)
   }catch(error){
     console.log("error", error);
   }
@@ -60,9 +59,12 @@ const getWeather = async (baseURL, animal, key)=>{
 
   const res = await fetch(baseURL+animal+key)
   try {
-
-    const data = await res.json();
-    return data;
+    if (res.status === 200) {
+      const data = await res.json();
+      return data;
+    } else {
+      alert('Please enter valid zip code :)')
+    }
   }  catch(error) {
     console.log("error", error);
     // appropriately handle the error
@@ -89,4 +91,4 @@ const postData = async ( url = '', data = {})=>{
     }
 }
 
-window.onload = addView();
+window.onload = updateUI();
