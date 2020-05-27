@@ -28,7 +28,7 @@ function addView(ar){
   ar.forEach((data,index)=>{
     const htmlData = `
         <div class="col-2">
-            <div class="num">Day ${ar.length-index}</div>
+            <div class="num">Day ${ar.length - index}</div>
             <div class="date">${data.date}</div>
         </div>
         <div class="col-3">
@@ -49,7 +49,8 @@ const updateUI = async () => {
   const request = await fetch('/all');
   try{
     const allData = await request.json();
-    addView(allData)
+    addView(Object.values(allData).reverse())
+    // addView(allData)
   }catch(error){
     console.log("error", error);
   }

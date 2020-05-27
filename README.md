@@ -10,6 +10,7 @@
 - VSCode
 - Node.js
 - Express.js
+- OpenWeatherMap API
 
 ## Deployment
 1) Clone or Download this repo.
@@ -17,7 +18,7 @@
 3) Run `npm install` to install dependencies.
 4) Run `node server` or `npm run start`.
 5) Open `http://localhost:3000/` on your web browser.
-6) Enjoy :)gi
+6) Enjoy :)
 
 ## 🤝 Contributing
 
