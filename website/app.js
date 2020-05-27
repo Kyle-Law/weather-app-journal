@@ -56,9 +56,9 @@ const updateUI = async () => {
   }
 }
 
-const getWeather = async (baseURL, animal, key)=>{
+const getWeather = async (baseURL, zip, key)=>{
 
-  const res = await fetch(baseURL+animal+key)
+  const res = await fetch(baseURL+zip+key)
   try {
     if (res.status === 200) {
       const data = await res.json();
