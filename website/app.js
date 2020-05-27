@@ -1,5 +1,5 @@
 /* Global Variables */
-const baseURL = 'http://api.openweathermap.org/data/2.5/weather?zip=';
+const baseURL = 'http://api.openweathermap.org/data/2.5/weather?q=';
 const apiKey = '&appid=a827ebeb3f600fff6e6558af4d980f98&units=imperial';
 // const dataArray = []
 // Create a new date instance dynamically with JS
@@ -33,7 +33,7 @@ function addView(ar){
         </div>
         <div class="col-3">
             <img src="http://openweathermap.org/img/w/${data.icon}.png">
-            <div class="temp">${Math.floor(data.temp-273)}°c</div>
+            <div class="temp">${data.temp}°</div>
             <div class="country">${data.country}</div>
         </div>
         <div class="content">${data.content}</div>
